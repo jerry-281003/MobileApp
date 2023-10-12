@@ -47,6 +47,12 @@ public class MainActivity extends AppCompatActivity {
                 if(item.getItemId()==R.id.menu_profile){
                     getSupportFragmentManager().beginTransaction().replace(R.id.main_frame_layout,profileFragment).commit();
                 }
+                if(item.getItemId()==R.id.menu_create){
+                    startActivity(new Intent(MainActivity.this,CreateGroupChatActivity.class));
+
+                } if(item.getItemId()==R.id.menu_event){
+                    startActivity(new Intent(MainActivity.this,BusinessInformationActivity.class));
+                }
                 return true;
             }
         });

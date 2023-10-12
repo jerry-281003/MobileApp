@@ -4,9 +4,17 @@
             android:icon="@drawable/chat_icon"
             android:id="@+id/menu_chat"
             />
+        <item android:title="Create"
+            android:icon="@drawable/btn_plus"
+            android:id="@+id/menu_create"
+            />
         <item android:title="Profile"
             android:icon="@drawable/person_icon"
             android:id="@+id/menu_profile"
+            />
+        <item android:title="Event"
+            android:icon="@drawable/btn_plus"
+            android:id="@+id/menu_event"
             />
 
 </menu>

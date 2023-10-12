@@ -1,6 +1,8 @@
 package com.example.mobileapp.Util;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -21,6 +23,12 @@ public class FirebaseUtil {
             return true;
         }
         return false;
+    }
+    public static DatabaseReference databaseReference(){
+        return FirebaseDatabase.getInstance().getReference();
+    }
+    public static DatabaseReference getBusinessInformation(){
+        return FirebaseDatabase.getInstance().getReference().child("Business");
     }
 
     public static DocumentReference currentUserDetails(){
@@ -74,6 +82,10 @@ public class FirebaseUtil {
 
     public static StorageReference  getOtherProfilePicStorageRef(String otherUserId){
         return FirebaseStorage.getInstance().getReference().child("profile_pic")
+                .child(otherUserId);
+    }
+    public static StorageReference  getOtherProfileBusinessPicStorageRef(String otherUserId){
+        return FirebaseStorage.getInstance().getReference().child("business_images")
                 .child(otherUserId);
     }
 
