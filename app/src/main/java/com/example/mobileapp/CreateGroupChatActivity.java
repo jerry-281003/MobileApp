@@ -6,7 +6,6 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -15,7 +14,6 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.mobileapp.Model.BusinessModel;
@@ -24,10 +22,8 @@ import com.example.mobileapp.Model.OnItemClickListener;
 import com.example.mobileapp.Model.UserModel;
 import com.example.mobileapp.Util.AndroidUtil;
 import com.example.mobileapp.Util.FirebaseUtil;
-import com.example.mobileapp.adapter.BusinessRecyclerAdapter;
 import com.example.mobileapp.adapter.DisplayUsersRecyclerAdapter;
 import com.example.mobileapp.adapter.EventRecyclerAdapter;
-import com.example.mobileapp.adapter.SearchUserRecyclerAdapter;
 import com.example.mobileapp.adapter.SearchUsersRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.database.DataSnapshot;
@@ -35,10 +31,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.Query;
-import  com.google.firebase.database.*;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class CreateGroupChatActivity extends AppCompatActivity  implements DataTransferListener, OnItemClickListener {
     EditText searchUserInput;
@@ -69,13 +63,15 @@ public class CreateGroupChatActivity extends AppCompatActivity  implements DataT
 
     @Override
     public void onItemClick(BusinessModel businessModel) {
-        VisibleView();
-       SetTextCardView(businessModel);
+        VisibleViewCardEvent();
+        InVisibleRecyclerEventView();
+        SetTextCardView(businessModel);
 
     }
     @Override
     public void onDataTransfer(UserModel user) {
         boolean userExists = false;
+        InVisibleRecyclerUserView();
         for (UserModel existingUser : userList) {
             if (existingUser.getUserId().equals(user.getUserId())) {
                 userExists = true;
@@ -93,7 +89,7 @@ public class CreateGroupChatActivity extends AppCompatActivity  implements DataT
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_group_chat);
-        InVisibleView();
+        InVisibleCardEventView();
 
         searchUserInput = findViewById(R.id.seach_username_input);
         searchUserButton = findViewById(R.id.search_user_btn);
@@ -114,6 +110,7 @@ public class CreateGroupChatActivity extends AppCompatActivity  implements DataT
 
 
         searchUserButton.setOnClickListener(v -> {
+            VisibleRecyclerUserView();
             String searchTerm = searchUserInput.getText().toString();
             if(searchTerm.isEmpty() || searchTerm.length()<3){
                 searchUserInput.setError("Invalid Username");
@@ -124,6 +121,7 @@ public class CreateGroupChatActivity extends AppCompatActivity  implements DataT
         });
 
         searchEventButton.setOnClickListener(v -> {
+            VisibleRecyclerEventView();
             String searchTerm = searchEventInput.getText().toString();
 
 
@@ -208,6 +206,9 @@ public class CreateGroupChatActivity extends AppCompatActivity  implements DataT
                     if (snapshot1.child("BusinessName").exists()) {
                         business.setBusinessName(snapshot1.child("BusinessName").getValue().toString());
                     }
+                    if (snapshot1.child("BusinessId").exists()) {
+                        business.setBusinessId(snapshot1.child("BusinessId").getValue().toString());
+                    }
 
                     businessList.add(business);
                 }
@@ -222,9 +223,7 @@ public class CreateGroupChatActivity extends AppCompatActivity  implements DataT
         });
     }
 
-
-
-
+    
     @Override
     protected void onStart() {
         super.onStart();
@@ -249,14 +248,30 @@ public class CreateGroupChatActivity extends AppCompatActivity  implements DataT
         businessList.clear();
         eventAdapter.notifyDataSetChanged();
     }
-    private void InVisibleView() {
+    private void InVisibleCardEventView() {
         CardView cardEventChoose = findViewById(R.id.card_event_choose);
-        cardEventChoose.setVisibility(View.INVISIBLE);
+        cardEventChoose.setVisibility(View.GONE);
         cardEventChoose.invalidate();
     }
-    private void VisibleView() {
+    private void VisibleViewCardEvent() {
         CardView cardEventChoose = findViewById(R.id.card_event_choose);
         cardEventChoose.setVisibility(View.VISIBLE);
+    }
+    void VisibleRecyclerUserView() {
+        RecyclerView RecyclerUserView = findViewById(R.id.search_user_recycler_view);
+        RecyclerUserView.setVisibility(View.VISIBLE);
+    }
+    void InVisibleRecyclerUserView() {
+        RecyclerView RecyclerUserView = findViewById(R.id.search_user_recycler_view);
+        RecyclerUserView.setVisibility(View.GONE);
+    }
+    void VisibleRecyclerEventView() {
+        RecyclerView RecyclerEventView = findViewById(R.id.search_event_recycler_view);
+        RecyclerEventView.setVisibility(View.VISIBLE);
+    }
+    void InVisibleRecyclerEventView() {
+        RecyclerView RecyclerEventView = findViewById(R.id.search_event_recycler_view);
+        RecyclerEventView.setVisibility(View.GONE);
     }
     private void SetTextCardView(BusinessModel business){
 

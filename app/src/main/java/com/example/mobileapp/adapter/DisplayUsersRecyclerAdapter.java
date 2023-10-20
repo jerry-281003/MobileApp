@@ -23,24 +23,15 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import java.util.List;
 
 public class DisplayUsersRecyclerAdapter extends RecyclerView.Adapter<DisplayUsersRecyclerAdapter.UserModelViewHolder> {
-
     Context context;
     private List<UserModel> userList;
-
     public DisplayUsersRecyclerAdapter(List<UserModel> userList, Context context) {
-
         this.context = context;
         this.userList=userList;
     }
 
     @Override
     public void onBindViewHolder(@NonNull UserModelViewHolder holder, int position) {
-        holder.usernameText.setText(userList.get(position).getUsername());
-        holder.phoneText.setText(userList.get(position).getPhone());
-        if (userList.get(position).getUserId().equals(FirebaseUtil.currentUserId())) {
-            holder.usernameText.setText(userList.get(position).getUsername() + " (Me)");
-        }
-
         FirebaseUtil.getOtherProfilePicStorageRef(userList.get(position).getUserId()).getDownloadUrl()
                 .addOnCompleteListener(t -> {
                     if (t.isSuccessful()) {
@@ -48,31 +39,28 @@ public class DisplayUsersRecyclerAdapter extends RecyclerView.Adapter<DisplayUse
                         AndroidUtil.setProfilePic(context, uri, holder.profilePic);
                     }
                 });
-
-
-
     }
     @Override
     public int getItemCount() {
         return userList.size();
     }
 
+
+
     @NonNull
     @Override
     public UserModelViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.search_user_recycler_row,parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.image_profile_search,parent, false);
         return new UserModelViewHolder(view);
     }
 
     class UserModelViewHolder extends RecyclerView.ViewHolder {
-        TextView usernameText;
-        TextView phoneText;
+
         ImageView profilePic;
 
         public UserModelViewHolder(@NonNull View itemView) {
             super(itemView);
-            usernameText = itemView.findViewById(R.id.user_name_text);
-            phoneText = itemView.findViewById(R.id.phone_text);
+
             profilePic = itemView.findViewById(R.id.profile_pic_image_view);
         }
     }

@@ -6,6 +6,23 @@
     android:layout_height="match_parent"
     tools:context=".SearchUserActivity">
     <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/my_primary"
+        android:padding="10dp"
+        android:id="@+id/main_toolbar">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:layout_marginStart="10dp"
+            android:layout_centerVertical="true"/>
+    </RelativeLayout>
+    <RelativeLayout
         android:id="@+id/search_user_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -14,17 +31,20 @@
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp">
 
+
         <EditText
+
             android:id="@+id/seach_username_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="50dp"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"
             android:layout_toLeftOf="@id/search_user_btn"
             android:background="@drawable/edit_text_rounded_corner"
             android:elevation="4dp"
+
             android:hint="Username"
             android:padding="10dp" />
 
@@ -44,10 +64,12 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/search_user_recycler_view"
+        android:visibility="gone"
         android:layout_width="420dp"
-        android:layout_height="100dp"
+        android:layout_height="200dp"
         android:layout_below="@id/search_user_layout"
         android:padding="10dp" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/display_user_recycler_view"
         android:layout_width="420dp"
@@ -100,68 +122,73 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/search_event_recycler_view"
         android:layout_width="420dp"
-        android:layout_height="100dp"
+        android:layout_height="200dp"
         android:layout_below="@id/search_event_layout"
         android:layout_marginTop="9dp"
         android:padding="10dp" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_event_choose"
-
-        app:cardElevation="10dp"
-        app:cardCornerRadius="10dp"
-        android:layout_margin="5dp"
-        android:layout_below="@id/search_event_recycler_view"
-        app:cardBackgroundColor="#FFFFFF"
+        android:visibility="gone"
         android:layout_width="420dp"
-        android:layout_height="200dp">
+        android:layout_height="200dp"
+        android:layout_below="@id/search_event_recycler_view"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"
+        app:cardBackgroundColor="#FFFFFF"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="10dp">
 
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
             <ImageView
-                android:layout_margin="10dp"
                 android:id="@+id/imageBusiness"
                 android:layout_width="200dp"
-                android:layout_height="150dp"/>
+                android:layout_height="150dp"
+                android:layout_margin="10dp" />
 
             <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/txtNameBusiness"
-                    android:textColor="#000"
-                    android:textStyle="bold"
-                    android:textSize="25sp"
-                    android:layout_margin="10dp"
-                    android:text="Movie Name"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:text=""
+                    android:textColor="#000"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/txtDescription"
-                    android:layout_margin="10dp"
-                    android:text="Movie Date"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:text="" />
+
                 <TextView
                     android:id="@+id/txtAddressBusiness"
-                    android:layout_margin="10dp"
-                    android:text="Movie Date"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:text="" />
+
                 <TextView
                     android:id="@+id/txtPhoneBusiness"
-                    android:layout_margin="10dp"
-                    android:text="Movie Date"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:text="" />
 
             </LinearLayout>
 
@@ -180,6 +207,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_marginStart="160dp"
+            android:layout_marginBottom="0dp"
             android:text="Create"></Button>
 
     </LinearLayout>

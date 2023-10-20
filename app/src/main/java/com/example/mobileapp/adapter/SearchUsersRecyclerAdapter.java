@@ -10,9 +10,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mobileapp.ChatActivity;
+import com.example.mobileapp.CreateGroupChatActivity;
 import com.example.mobileapp.Model.BusinessModel;
 import com.example.mobileapp.Model.DataTransferListener;
 import com.example.mobileapp.Model.UserModel;
@@ -60,6 +62,7 @@ public class SearchUsersRecyclerAdapter extends FirestoreRecyclerAdapter<UserMod
             @Override
             public void onClick(View view) {
                 dataTransferListener.onDataTransfer(model);
+
             }
         });
     }

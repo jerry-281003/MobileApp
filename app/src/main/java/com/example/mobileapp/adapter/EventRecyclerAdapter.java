@@ -38,7 +38,7 @@ public class EventRecyclerAdapter extends RecyclerView.Adapter<EventRecyclerAdap
     @NonNull
     @Override
     public EventViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.business_card_view, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.business_item, parent, false);
         return new EventViewHolder(view);
     }
 
@@ -52,6 +52,7 @@ public class EventRecyclerAdapter extends RecyclerView.Adapter<EventRecyclerAdap
 
         Glide.with(context)
                 .load(eventList.get(position).getPhotoUrl())
+                .override(200,150)
                 .into(holder.imageBusiness);
 
 

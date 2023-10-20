@@ -64,6 +64,9 @@ public class BusinessInformationActivity extends AppCompatActivity {
                     if (snapshot1.child("BusinessName").exists()) {
                         business.setBusinessName(snapshot1.child("BusinessName").getValue().toString());
                     }
+                    if (snapshot1.child("BusinessId").exists()) {
+                        business.setBusinessId(snapshot1.child("BusinessId").getValue().toString());
+                    }
 
                     businessList.add(business);
                 }

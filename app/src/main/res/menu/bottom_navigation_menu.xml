@@ -5,7 +5,7 @@
             android:id="@+id/menu_chat"
             />
         <item android:title="Create"
-            android:icon="@drawable/btn_plus"
+            android:icon="@drawable/btn_group"
             android:id="@+id/menu_create"
             />
         <item android:title="Profile"
@@ -13,7 +13,7 @@
             android:id="@+id/menu_profile"
             />
         <item android:title="Event"
-            android:icon="@drawable/btn_plus"
+            android:icon="@drawable/btn_map"
             android:id="@+id/menu_event"
             />
 

@@ -7,10 +7,21 @@
         <deviceKey>
           <Key>
             <type value="SERIAL_NUMBER" />
-            <value value="094e892d2238" />
+            <value value="6h4hdyqweiw4ojgq" />
           </Key>
         </deviceKey>
       </Target>
     </runningDeviceTargetsSelectedWithDialog>
+    <targetsSelectedWithDialog>
+      <Target>
+        <type value="QUICK_BOOT_TARGET" />
+        <deviceKey>
+          <Key>
+            <type value="VIRTUAL_DEVICE_PATH" />
+            <value value="C:\Users\Lenovo\.android\avd\pixel_5_-_api_31.avd" />
+          </Key>
+        </deviceKey>
+      </Target>
+    </targetsSelectedWithDialog>
   </component>
 </project>

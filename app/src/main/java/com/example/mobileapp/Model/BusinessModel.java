@@ -4,6 +4,15 @@ public class BusinessModel {
 
     public String Description;
 
+    public String getBusinessId() {
+        return BusinessId;
+    }
+
+    public void setBusinessId(String businessId) {
+        BusinessId = businessId;
+    }
+
+    public String BusinessId;
     public String photoUrl;
     public String BusinessName;
     public String Address;
