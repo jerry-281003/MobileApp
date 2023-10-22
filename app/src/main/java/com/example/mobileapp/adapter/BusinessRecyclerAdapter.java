@@ -45,7 +45,7 @@ public class BusinessRecyclerAdapter extends RecyclerView.Adapter<BusinessRecycl
 
     @Override
     public void onBindViewHolder(@NonNull BusinessRecyclerAdapter.ViewHolder holder, int position) {
-        holder.txtDescription.setText(businessList.get(position).getBusinessId());
+        holder.txtDescription.setText(businessList.get(position).getDescription());
         holder.txtNameBusiness.setText(businessList.get(position).getBusinessName());
         holder.txtPhoneBusiness.setText(businessList.get(position).getPhone());
         holder.txtAddressBusiness.setText(businessList.get(position).getAddress());

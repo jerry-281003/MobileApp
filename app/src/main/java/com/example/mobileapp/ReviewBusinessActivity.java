@@ -13,8 +13,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.example.mobileapp.Model.BusinessModel;
+import com.example.mobileapp.Model.DiscountModel;
 import com.example.mobileapp.Model.OnItemClickListener;
 import com.example.mobileapp.Model.ReviewModel;
 import com.example.mobileapp.Model.UserModel;
@@ -28,6 +30,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 
@@ -43,7 +46,11 @@ public class ReviewBusinessActivity extends AppCompatActivity  {
     RecyclerView review_recycler_view;
     ReviewRecyclerAdapter reviewRecyclerAdapter;
     ArrayList<ReviewModel> reviewList;
+
     ReviewModel review;
+    TextView txtCode;
+
+
 
 
     @Override
@@ -54,16 +61,18 @@ public class ReviewBusinessActivity extends AppCompatActivity  {
         reviewInput=findViewById(R.id.review_input);
         sentReview=findViewById(R.id.sent_review);
         review_recycler_view=findViewById(R.id.review_recycler_view);
+        txtCode=findViewById(R.id.txtCode);
+
 
         Intent intent = getIntent();
         String BusinessId = intent.getStringExtra("BusinessId");
 
+        GetDiscountFromFirebase(BusinessId);
+
+
 
 
         reviewList =new ArrayList<>();
-
-
-
 
         setupReviewRecyclerView(BusinessId);
 
@@ -146,6 +155,30 @@ public class ReviewBusinessActivity extends AppCompatActivity  {
                 // Handle errors if necessary
             }
 
+        });
+    }
+    private void GetDiscountFromFirebase(String BusinessId) {
+        Query query = FirebaseUtil.databaseReference().child("Discount")
+                .orderByChild("BusinessId")
+                .equalTo(BusinessId);
+        query.addValueEventListener(new ValueEventListener() {
+
+        @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                for (DataSnapshot snapshot1 : snapshot.getChildren()) {
+                    DiscountModel discount = new DiscountModel();
+                    if (snapshot1.child("DiscoutCode").exists()) {
+                        discount.setDiscountCode(snapshot1.child("DiscoutCode").getValue().toString());
+                    }
+                   txtCode.setText(discount.getDiscountCode());
+                }
+
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // Handle database error if needed
+            }
         });
     }
 
